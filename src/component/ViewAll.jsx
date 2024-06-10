@@ -6,12 +6,17 @@ const ViewAll = () => {
     const [student,setStudent]=useState([])
 
     const fetchData=()=>{
-        axios.get("https://anishpdm.github.io/dummy-api-new/student.json").then(
+        axios.get("https://courseapplogix.onrender.com/getdata").then(
             (response)=>{
                 setStudent(response.data)
             }
-        ).catch().finally()
-    }
+        ).catch(
+            (error)=>{
+                console.log(error.message)
+                alert(error.message)
+            }
+        ).finally()
+    } 
 
     useEffect(()=>{fetchData()},[])
 
@@ -29,6 +34,7 @@ const ViewAll = () => {
                         <table className="table table-dark table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th scope="col">#</th>
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Collage</th>
@@ -46,6 +52,7 @@ const ViewAll = () => {
                                     return <tbody>
                                         <tr>
 
+                                            <td>{index+1}</td>
                                             <td>{value.firstname}</td>
                                             <td>{value.lastname}</td>
                                             <td>{value.college}</td>
